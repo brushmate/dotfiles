@@ -1,0 +1,37 @@
+[user]
+	name = {{ .fullName | quote }}
+	email = {{ .email | quote }}
+
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	cob = checkout -b
+
+[pull]
+	ff = only
+
+[init]
+	defaultBranch = main
+
+[core]
+	excludesFile = ~/.gitignore
+	hooksPath = ~/.git-hooks
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+[rerere]
+	enabled = true
+

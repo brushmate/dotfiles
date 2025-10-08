@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+stern -o json "$@" | jq --unbuffered --raw-output '[(.message | fromjson)."@timestamp", .podName, (.message | fromjson).log.level, (.message | fromjson).message] | @tsv'

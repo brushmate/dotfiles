@@ -1,0 +1,15 @@
+#!/bin/sh
+
+COMMIT_MSG_FILE="$1"
+JIRA_TICKET_REGEX='^[A-Z]+-[0-9]+'
+
+if grep -iqE "$JIRA_TICKET_REGEX" "$COMMIT_MSG_FILE"; then
+  exit 0
+fi
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+JIRA_TICKET=$(echo "$BRANCH_NAME" | grep -ioE "$JIRA_TICKET_REGEX" | tr '[:lower:]' '[:upper:]')
+
+if [ -n "$JIRA_TICKET" ]; then
+  sed -i '' "1s/^/$JIRA_TICKET /" "$COMMIT_MSG_FILE"
+fi

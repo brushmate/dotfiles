@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+kubectl run "$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | fold -w 6 | head -n 1)" --rm -i --tty --image nicolaka/netshoot "$@"

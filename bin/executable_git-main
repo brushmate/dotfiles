@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+git rev-parse --verify main >/dev/null 2>&1 && MAIN_BRANCH=main
+git rev-parse --verify master >/dev/null 2>&1 && MAIN_BRANCH=master
+git rev-parse --verify v1 >/dev/null 2>&1 && MAIN_BRANCH=v1
+
+if [ -z "$MAIN_BRANCH" ];
+then
+  echo "Main branch could not be determined" >&2
+  exit 1
+fi
+
+git co "$MAIN_BRANCH" && git pull && git dmb
